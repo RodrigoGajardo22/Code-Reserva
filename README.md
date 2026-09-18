@@ -8,7 +8,13 @@
 
 # 💻 CodeReserva — Sistemas & Apps
 
-### 💡 Reservá fácil. Desarrollá mejor.
+## 💡 Reservá fácil. Desarrollá mejor.
+
+## Contexto
+
+    Este proyecto fue desarrollado en equipo durante el curso Aceleración Tech. Mi participación se enfocó principalmente en la implementación del backend, incluyendo la API, autenticación, permisos, lógica de reservas y generación de documentos PDF.
+
+##
 
 **Plataforma web para registrar y gestionar los servicios de desarrollo de software
 (sistemas, apps y desarrollo web) que ofrece la empresa.**
@@ -107,14 +113,14 @@ por **una herramienta limpia, rápida y fácil de usar** para todo el equipo.
 
 ## 🛠️ Stack tecnológico
 
-| Tecnología               | ¿Para qué?                                                              |
-| ------------------------ | ----------------------------------------------------------------------- |
-| 🐍 **Python 3.12**       | Lenguaje de programación del backend.                                   |
-| 🌐 **Django 6.1**        | Framework web: modelos, vistas, formularios, rutas y sesiones.          |
-| 🎨 **Bootstrap 5.3**     | Interfaz de usuario moderna y responsive.                               |
-| 🧾 **ReportLab**         | Generación del comprobante PDF de cada reserva.                         |
-| 🗃️ **SQLite**            | Base de datos ligera para desarrollo.                                   |
-| 🐳 **Podman**            | Contenedor opcional para levantar todo con un solo comando.             |
+| Tecnología           | ¿Para qué?                                                     |
+| -------------------- | -------------------------------------------------------------- |
+| 🐍 **Python 3.12**   | Lenguaje de programación del backend.                          |
+| 🌐 **Django 6.1**    | Framework web: modelos, vistas, formularios, rutas y sesiones. |
+| 🎨 **Bootstrap 5.3** | Interfaz de usuario moderna y responsive.                      |
+| 🧾 **ReportLab**     | Generación del comprobante PDF de cada reserva.                |
+| 🗃️ **SQLite**        | Base de datos ligera para desarrollo.                          |
+| 🐳 **Podman**        | Contenedor opcional para levantar todo con un solo comando.    |
 
 ---
 
@@ -303,80 +309,80 @@ Si cambiás el `Dockerfile` o las dependencias: `podman compose up --build`.
 
 ### 🏠 Público (cliente)
 
-| Ruta            | Vista              | Descripción                                          |
-| --------------- | ------------------ | ---------------------------------------------------- |
-| `/`             | `home`             | Home con catálogo de servicios activos.              |
-| `/reservar/`    | `solicitud_reserva`| Formulario público de solicitud de reserva.          |
-| `/consultar/`   | `consulta_reserva` | Consulta del estado de reservas por DNI (+ PDF).     |
+| Ruta          | Vista               | Descripción                                      |
+| ------------- | ------------------- | ------------------------------------------------ |
+| `/`           | `home`              | Home con catálogo de servicios activos.          |
+| `/reservar/`  | `solicitud_reserva` | Formulario público de solicitud de reserva.      |
+| `/consultar/` | `consulta_reserva`  | Consulta del estado de reservas por DNI (+ PDF). |
 
 ### 🔐 Acceso y panel interno (personal)
 
-| Ruta         | Vista      | Descripción                                         |
-| ------------ | ---------- | --------------------------------------------------- |
-| `/ingresar/` | `ingresar` | Login del personal (legajo + contraseña DNI).       |
-| `/salir/`    | `salir`    | Cierre de sesión.                                   |
-| `/panel/`    | `dashboard`| Panel con métricas del negocio.                     |
+| Ruta         | Vista       | Descripción                                   |
+| ------------ | ----------- | --------------------------------------------- |
+| `/ingresar/` | `ingresar`  | Login del personal (legajo + contraseña DNI). |
+| `/salir/`    | `salir`     | Cierre de sesión.                             |
+| `/panel/`    | `dashboard` | Panel con métricas del negocio.               |
 
 ### 💻 Servicios
 
-| Ruta                            | Vista                 | Descripción                             |
-| ------------------------------- | --------------------- | --------------------------------------- |
-| `/servicios/`                   | `listar_servicios`    | Listado de servicios activos.           |
-| `/servicios/nuevo/`             | `crear_servicio`      | Alta de un servicio.                    |
-| `/servicios/editar/<pk>/`       | `editar_servicio`     | Edición de un servicio.                 |
-| `/servicios/eliminar/<pk>/`     | `BajaServicio`        | Baja lógica de un servicio.             |
-| `/servicios/inactivos/`         | `listar_inactivos`    | Servicios dados de baja.                |
-| `/servicios/restaurar/<pk>/`    | `RestaurarServicio`   | Reactivar un servicio.                  |
+| Ruta                         | Vista               | Descripción                   |
+| ---------------------------- | ------------------- | ----------------------------- |
+| `/servicios/`                | `listar_servicios`  | Listado de servicios activos. |
+| `/servicios/nuevo/`          | `crear_servicio`    | Alta de un servicio.          |
+| `/servicios/editar/<pk>/`    | `editar_servicio`   | Edición de un servicio.       |
+| `/servicios/eliminar/<pk>/`  | `BajaServicio`      | Baja lógica de un servicio.   |
+| `/servicios/inactivos/`      | `listar_inactivos`  | Servicios dados de baja.      |
+| `/servicios/restaurar/<pk>/` | `RestaurarServicio` | Reactivar un servicio.        |
 
 ### 📅 Reservas
 
-| Ruta                          | Vista              | Descripción                                        |
-| ----------------------------- | ------------------ | -------------------------------------------------- |
-| `/reservas/`                  | `listar_reservas`  | Listado de reservas.                               |
-| `/reservas/nueva/`            | `crear_reserva`    | Alta de una reserva.                               |
-| `/reservas/editar/<pk>/`      | `editar_reserva`   | Edición de una reserva.                            |
-| `/reservas/eliminar/<pk>/`    | `eliminar_reserva` | Eliminación de una reserva.                        |
-| `/reservas/imprimir/<pk>/`    | `datos_reserva`    | **Comprobante PDF** de la reserva (ReportLab).     |
+| Ruta                       | Vista              | Descripción                                    |
+| -------------------------- | ------------------ | ---------------------------------------------- |
+| `/reservas/`               | `listar_reservas`  | Listado de reservas.                           |
+| `/reservas/nueva/`         | `crear_reserva`    | Alta de una reserva.                           |
+| `/reservas/editar/<pk>/`   | `editar_reserva`   | Edición de una reserva.                        |
+| `/reservas/eliminar/<pk>/` | `eliminar_reserva` | Eliminación de una reserva.                    |
+| `/reservas/imprimir/<pk>/` | `datos_reserva`    | **Comprobante PDF** de la reserva (ReportLab). |
 
 ### 📥 Solicitudes de reserva
 
-| Ruta                               | Vista               | Descripción                                        |
-| ---------------------------------- | ------------------- | -------------------------------------------------- |
-| `/solicitudes/`                    | `listar_solicitudes`| Bandeja: pendientes + historial.                   |
-| `/solicitudes/atender/<pk>/`       | `atender_solicitud` | Confirma y crea la reserva (+ cliente si no existe).|
-| `/solicitudes/rechazar/<pk>/`      | `rechazar_solicitud`| Rechaza la solicitud.                              |
+| Ruta                          | Vista                | Descripción                                          |
+| ----------------------------- | -------------------- | ---------------------------------------------------- |
+| `/solicitudes/`               | `listar_solicitudes` | Bandeja: pendientes + historial.                     |
+| `/solicitudes/atender/<pk>/`  | `atender_solicitud`  | Confirma y crea la reserva (+ cliente si no existe). |
+| `/solicitudes/rechazar/<pk>/` | `rechazar_solicitud` | Rechaza la solicitud.                                |
 
 ### 🧑‍🤝‍🧑 Clientes
 
-| Ruta                        | Vista                         | Descripción                  |
-| --------------------------- | ----------------------------- | ---------------------------- |
-| `/clientes/`                | `listar_clientes`             | Listado de clientes activos. |
-| `/clientes/nuevo/`          | `crear_cliente`               | Alta de un cliente.          |
-| `/clientes/editar/<pk>/`    | `editar_cliente`              | Edición de un cliente.       |
-| `/clientes/eliminar/<pk>/`  | `BajaCliente`                 | Baja lógica de un cliente.   |
-| `/clientes/inactivos/`      | `listar_clientes_inactivos`   | Clientes dados de baja.      |
-| `/clientes/restaurar/<pk>/` | `RestaurarCliente`            | Reactivar un cliente.        |
+| Ruta                        | Vista                       | Descripción                  |
+| --------------------------- | --------------------------- | ---------------------------- |
+| `/clientes/`                | `listar_clientes`           | Listado de clientes activos. |
+| `/clientes/nuevo/`          | `crear_cliente`             | Alta de un cliente.          |
+| `/clientes/editar/<pk>/`    | `editar_cliente`            | Edición de un cliente.       |
+| `/clientes/eliminar/<pk>/`  | `BajaCliente`               | Baja lógica de un cliente.   |
+| `/clientes/inactivos/`      | `listar_clientes_inactivos` | Clientes dados de baja.      |
+| `/clientes/restaurar/<pk>/` | `RestaurarCliente`          | Reactivar un cliente.        |
 
 ### 🗂️ Coordinadores
 
-| Ruta                              | Vista                   | Descripción                     |
-| --------------------------------- | ----------------------- | ------------------------------- |
-| `/coordinadores/`                 | `listar_coordinadores`  | Listado de coordinadores activos.|
-| `/coordinadores/nuevo/`           | `agregar_coordinador`   | Alta de un coordinador.         |
-| `/coordinadores/editar/<pk>/`     | `editar_coordinador`    | Edición de un coordinador.      |
-| `/coordinadores/eliminar/<pk>/`   | `BajaCoordinador`       | Baja lógica.                    |
-| `/coordinadores/inactivos/`       | `coordinadores_inactivos`| Dados de baja.                 |
-| `/coordinadores/restaurar/<pk>/`  | `RestaurarCoordinador`  | Reactivar.                      |
+| Ruta                             | Vista                     | Descripción                       |
+| -------------------------------- | ------------------------- | --------------------------------- |
+| `/coordinadores/`                | `listar_coordinadores`    | Listado de coordinadores activos. |
+| `/coordinadores/nuevo/`          | `agregar_coordinador`     | Alta de un coordinador.           |
+| `/coordinadores/editar/<pk>/`    | `editar_coordinador`      | Edición de un coordinador.        |
+| `/coordinadores/eliminar/<pk>/`  | `BajaCoordinador`         | Baja lógica.                      |
+| `/coordinadores/inactivos/`      | `coordinadores_inactivos` | Dados de baja.                    |
+| `/coordinadores/restaurar/<pk>/` | `RestaurarCoordinador`    | Reactivar.                        |
 
 ### 👷 Empleados
 
-| Ruta                       | Vista                  | Descripción                    |
-| -------------------------- | ---------------------- | ------------------------------ |
-| `/empleados/`              | `listar_empleados`     | Listado de empleados activos.  |
-| `/empleados/editar/<pk>/`  | `editar_empleado`      | Edición (+ sincroniza usuario).|
-| `/empleados/eliminar/<pk>/`| `BajaEmpleado`         | Baja lógica (desactiva usuario).|
-| `/empleados/inactivos/`    | `empleados_inactivos`  | Dados de baja.                 |
-| `/empleados/restaurar/<pk>/`| `RestaurarEmpleado`   | Reactivar (reactiva usuario).  |
+| Ruta                         | Vista                 | Descripción                      |
+| ---------------------------- | --------------------- | -------------------------------- |
+| `/empleados/`                | `listar_empleados`    | Listado de empleados activos.    |
+| `/empleados/editar/<pk>/`    | `editar_empleado`     | Edición (+ sincroniza usuario).  |
+| `/empleados/eliminar/<pk>/`  | `BajaEmpleado`        | Baja lógica (desactiva usuario). |
+| `/empleados/inactivos/`      | `empleados_inactivos` | Dados de baja.                   |
+| `/empleados/restaurar/<pk>/` | `RestaurarEmpleado`   | Reactivar (reactiva usuario).    |
 
 ---
 
@@ -387,11 +393,11 @@ La app **`api`** expone un CRUD REST completo de **servicios**, **clientes**,
 automáticamente con [drf-spectacular](https://drf-spectacular.readthedocs.io/)
 a partir de los ViewSets y serializers, sin anotar cada endpoint a mano.
 
-| Ruta              | ¿Qué es?                                                                        |
-| ----------------- | ------------------------------------------------------------------------------- |
-| `/api/`           | Raíz navegable de la API (Browsable API de DRF).                                |
-| `/api/docs/`      | **Swagger UI** interactiva: explorá y probá cada endpoint desde el navegador.  |
-| `/api/descarga/`  | Descargá el schema OpenAPI completo en formato JSON (`reserva-api-schema.json`). |
+| Ruta             | ¿Qué es?                                                                         |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `/api/`          | Raíz navegable de la API (Browsable API de DRF).                                 |
+| `/api/docs/`     | **Swagger UI** interactiva: explorá y probá cada endpoint desde el navegador.    |
+| `/api/descarga/` | Descargá el schema OpenAPI completo en formato JSON (`reserva-api-schema.json`). |
 
 > 💡 La interfaz de Swagger UI se sirve desde el CDN de jsdelivr, por lo que hace
 > falta **conexión a internet** para verla. Desde el menú **API** del navbar
@@ -401,15 +407,15 @@ a partir de los ViewSets y serializers, sin anotar cada endpoint a mano.
 
 ## 🧱 Modelos de datos
 
-| Modelo                | Descripción                                                               |
-| --------------------- | ------------------------------------------------------------------------- |
-| **`Persona`**         | Clase base abstracta con `nombre`, `apellido`, `numero_documento` y `activo`. |
-| **`Servicio`**        | Servicio de desarrollo que ofrece la empresa: nombre, descripción y precio.|
-| **`Cliente`**         | Hereda de `Persona`. Agrega `telefono` y `email`. Quien contrata.         |
-| **`Coordinador`**     | Hereda de `Persona`. Agrega `fecha_alta`.                                 |
-| **`Empleado`**        | Hereda de `Persona`. Agrega `numero_legajo` y su **`usuario`** de acceso (auth). |
-| **`ReservaServicio`** | Relaciona cliente + servicio + empleado + coordinador en una fecha.       |
-| **`SolicitudReserva`**| Pedido público de reserva con estado `pendiente` / `aceptada` / `rechazada` y vínculo a la reserva creada. |
+| Modelo                 | Descripción                                                                                                |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **`Persona`**          | Clase base abstracta con `nombre`, `apellido`, `numero_documento` y `activo`.                              |
+| **`Servicio`**         | Servicio de desarrollo que ofrece la empresa: nombre, descripción y precio.                                |
+| **`Cliente`**          | Hereda de `Persona`. Agrega `telefono` y `email`. Quien contrata.                                          |
+| **`Coordinador`**      | Hereda de `Persona`. Agrega `fecha_alta`.                                                                  |
+| **`Empleado`**         | Hereda de `Persona`. Agrega `numero_legajo` y su **`usuario`** de acceso (auth).                           |
+| **`ReservaServicio`**  | Relaciona cliente + servicio + empleado + coordinador en una fecha.                                        |
+| **`SolicitudReserva`** | Pedido público de reserva con estado `pendiente` / `aceptada` / `rechazada` y vínculo a la reserva creada. |
 
 > 🔒 **Validaciones de `ReservaServicio`:** al guardar una reserva, Django
 > verifica automáticamente que el servicio esté **activo** y que **no exista
