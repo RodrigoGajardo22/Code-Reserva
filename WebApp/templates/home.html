@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio | {{ block.super }}{% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<section class="text-center py-5 mb-4">
+  <h1 class="display-5 fw-bold text-primary">Bienvenido a CodeReserva</h1>
+  <p class="lead mx-auto" style="max-width: 640px">
+    Conocé los servicios de desarrollo que ofrecemos y reservá la fecha de inicio
+    de tu proyecto. Si ya iniciaste una reserva, podés consultarla con tu DNI.
+  </p>
+  <div class="d-flex flex-wrap justify-content-center gap-2">
+    <a href="{% url 'solicitud_reserva' %}" class="btn btn-primary btn-lg">
+      <i class="bi bi-calendar-plus me-1"></i>Hacer una reserva
+    </a>
+    <a href="{% url 'consulta_reserva' %}" class="btn btn-outline-primary btn-lg">
+      <i class="bi bi-search me-1"></i>Consultar reserva por DNI
+    </a>
+  </div>
+</section>
+
+<section>
+  <h2 class="h4 mb-3 text-primary">Servicios disponibles</h2>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    {% for servicio in servicios %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column text-center">
+          <i class="bi bi-tag fs-1 text-primary"></i>
+          <h5 class="card-title mt-3">{{ servicio.nombre }}</h5>
+          <p class="card-text text-secondary">
+            {{ servicio.descripcion }}
+          </p>
+          <span class="badge bg-primary bg-opacity-10 text-primary fw-semibold align-self-center mb-3">
+            $ {{ servicio.precio }}
+          </span>
+          <div class="mt-auto">
+            <a href="{% url 'solicitud_reserva' %}?servicio={{ servicio.pk }}" class="btn btn-primary btn-sm">
+              <i class="bi bi-calendar-plus me-1"></i>Reservar este servicio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center text-secondary py-4">
+      <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+      Por el momento no hay servicios disponibles.
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

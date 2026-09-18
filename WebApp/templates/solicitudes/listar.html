@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}Solicitudes de reserva | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Solicitudes de reserva</h1>
+    <a href="{% url 'dashboard' %}" class="{{ estilos.boton_volver }}">
+        <i class="bi bi-arrow-left me-1"></i>Volver al panel
+    </a>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<h2 class="h5 mb-3 text-primary">Pendientes</h2>
+
+{% if pendientes %}
+    <div class="table-responsive mb-5">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>DNI</th>
+                    <th>Servicio</th>
+                    <th>Fecha deseada</th>
+                    <th>Contacto</th>
+                    <th>Recibida</th>
+                    <th class="text-end">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in pendientes %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="fw-semibold">{{ solicitud.nombre }} {{ solicitud.apellido }}</td>
+                        <td>{{ solicitud.numero_documento }}</td>
+                        <td>{{ solicitud.servicio.nombre }}</td>
+                        <td>{{ solicitud.fecha_servicio|default:'Sin fecha' }}</td>
+                        <td>
+                            {% if solicitud.telefono %}{{ solicitud.telefono }}<br>{% endif %}
+                            {% if solicitud.email %}{{ solicitud.email }}{% endif %}
+                        </td>
+                        <td>{{ solicitud.fecha_registro|date:"d/m/Y H:i" }}</td>
+                        <td class="text-end">
+                            <a href="{% url 'solicitud_atender' solicitud.pk %}" class="{{ estilos.boton_confirmacion }}">
+                                <i class="bi bi-check2-circle me-1"></i>Atender
+                            </a>
+                            <form action="{% url 'solicitud_rechazar' solicitud.pk %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="{{ estilos.boton_eliminar }}"
+                                        onclick="return confirm('¿Rechazar la solicitud de {{ solicitud.nombre }} {{ solicitud.apellido }}?');">
+                                    <i class="bi bi-x-circle me-1"></i>Rechazar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="card shadow-sm mb-5">
+        <div class="card-body text-center text-secondary py-4">
+            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+            No hay solicitudes pendientes.
+        </div>
+    </div>
+{% endif %}
+
+<h2 class="h5 mb-3 text-primary">Historial</h2>
+
+{% if historial %}
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>DNI</th>
+                    <th>Servicio</th>
+                    <th>Fecha deseada</th>
+                    <th>Recibida</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in historial %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="fw-semibold">{{ solicitud.nombre }} {{ solicitud.apellido }}</td>
+                        <td>{{ solicitud.numero_documento }}</td>
+                        <td>{{ solicitud.servicio.nombre }}</td>
+                        <td>{{ solicitud.fecha_servicio|default:'Sin fecha' }}</td>
+                        <td>{{ solicitud.fecha_registro|date:"d/m/Y H:i" }}</td>
+                        <td>
+                            {% if solicitud.estado == 'aceptada' %}
+                                <span class="badge bg-success">Aceptada</span>
+                            {% else %}
+                                <span class="badge bg-danger">Rechazada</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="card shadow-sm">
+        <div class="card-body text-center text-secondary py-4">
+            <i class="bi bi-clock-history fs-1 d-block mb-2"></i>
+            Todavía no hay solicitudes atendidas ni rechazadas.
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

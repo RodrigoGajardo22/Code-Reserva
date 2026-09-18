@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    image: reserva-web:local
+    container_name: reserva-web
+    working_dir: /app/WebApp
+    environment:
+      DJANGO_ALLOWED_HOSTS: "*"
+      DJANGO_CSRF_TRUSTED_ORIGINS: "https://*.trycloudflare.com"
+    volumes:
+      - ./WebApp:/app/WebApp
+    ports:
+      - "8000:8000"

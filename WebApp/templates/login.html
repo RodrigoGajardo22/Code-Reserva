@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Ingresar | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <h1 class="h3 mb-4 text-center">Acceso del personal</h1>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="username" class="form-label">Número de legajo</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              class="form-control"
+              placeholder="Ej: 101"
+              autofocus
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña (DNI)</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="form-control"
+              placeholder="Tu DNI"
+              required
+            >
+          </div>
+
+          <button type="submit" class="{{ estilos.boton_confirmacion }} w-100">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Ingresar
+          </button>
+        </form>
+        <p class="text-secondary small text-center mt-3 mb-0">
+          Ingresá con tu legajo y tu DNI como contraseña.
+        </p>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{% url 'admin:index' %}" class="text-decoration-none small">
+        <i class="bi bi-person-gear me-1"></i>¿Sos administrador? Ingresá al panel de administración
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

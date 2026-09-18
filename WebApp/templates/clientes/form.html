@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if cliente %}Editar{% else %}Nuevo{% endif %} Cliente | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                {% if cliente %}Editar Cliente{% else %}Añadir Cliente{% endif %}
+            </h1>
+            <a href="{% url 'clientes' %}" class="{{ estilos.boton_volver }}">
+                <i class="bi bi-arrow-left me-1"></i>Volver
+            </a>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre</label>
+                        <input type="text" name="{{ form.nombre.name }}" id="{{ form.nombre.id_for_label }}"
+                               class="form-control {% if form.nombre.errors %}is-invalid{% endif %}"
+                               value="{{ form.nombre.value|default:'' }}">
+                        {% if form.nombre.errors %}
+                            <div class="invalid-feedback">{{ form.nombre.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.appellido.id_for_label }}" class="form-label">Apellido</label>
+                        <input type="text" name="{{ form.apellido.name }}" id="{{ form.apellido.id_for_label }}"
+                                class="form-control {% if form.apellido.errors %}is-invalid{% endif %}"
+                                value="{{ form.apellido.value|default:'' }}">
+                        {% if form.apellido.errors %}
+                            <div class="invalid-feedback">{{ form.apellido.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.numero_documento.id_for_label }}" class="form-label">Numero de Documento</label>
+                        <div class="input-group">
+                            <input type="number" name="{{ form.numero_documento.name }}" id="{{ form.numero_documento.id_for_label }}"
+                                   class="form-control {% if form.numero_documento.errors %}is-invalid{% endif %}"
+                                   min="0" value="{{ form.numero_documento.value|default:'' }}">
+                            {% if form.numero_documento.errors %}
+                                <div class="invalid-feedback">{{ form.numero_documento.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.telefono.id_for_label }}" class="form-label">Numero de Teléfono</label>
+                        <div class="input-group">
+                            <input type="number" name="{{ form.telefono.name }}" id="{{ form.telefono.id_for_label }}"
+                                   class="form-control {% if form.telefono.errors %}is-invalid{% endif %}"
+                                    value="{{ form.telefono.value|default:'' }}">
+                            {% if form.telefono.errors %}
+                                <div class="invalid-feedback">{{ form.telefono.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                        <div class="input-group">
+                            <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}"
+                                   class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                                    value="{{ form.email.value|default:'' }}">
+                            {% if form.email.errors %}
+                                <div class="invalid-feedback">{{ form.email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-check form-switch mb-4">
+                        <input type="checkbox" name="{{ form.activo.name }}" id="{{ form.activo.id_for_label }}"
+                               class="form-check-input"
+                               {% if form.activo.value %}checked{% endif %}>
+                        <label for="{{ form.activo.id_for_label }}" class="form-check-label">Activo</label>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{% url 'clientes' %}" class="{{ estilos.boton_volver }}">Cancelar</a>
+                        <button type="submit" class="{{ estilos.boton_confirmacion }}">
+                            <i class="bi bi-check-lg me-1"></i>{% if cliente %}Guardar Cambios{% else %}Añadir Cliente{% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
